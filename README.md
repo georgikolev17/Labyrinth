@@ -1,0 +1,2 @@
+# Labyrinth
+Escape the labyrinth
