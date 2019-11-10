@@ -76,15 +76,12 @@ function play(e) {
         while (rows.length>0) {
             let currentRow = rows.shift();
             let currentCol = cols.shift();
-            console.log(currentRow + " " + currentCol + ' ------> ' + distance);
             let current = labyrinth[currentRow][currentCol];
 
             if(current == 'f'){
                 finalRow = currentRow;
                 finalCol = currentCol;
-                console.log("-------------------------------------------")
                 isThereAnExit = true;
-                console.log(isThereAnExit);
                 break;
             }
 
@@ -93,33 +90,28 @@ function play(e) {
                 cols.push(currentCol);
                 way[currentRow-1][currentCol] = distance;
                 visited[currentRow-1][currentCol] = true;
-                console.log(labyrinth[currentRow][currentCol]);
             }
             if(downNeighbour(currentRow, currentCol, visited)){
                 rows.push(currentRow+1);
                 cols.push(currentCol);
                 way[currentRow+1][currentCol] = distance;
                 visited[currentRow+1][currentCol] = true;
-                console.log(labyrinth[currentRow][currentCol]);
             }
             if(leftNeighbour(currentRow, currentCol, visited)){
                 rows.push(currentRow);
                 cols.push(currentCol-1);
                 way[currentRow][currentCol-1] = distance;
                 visited[currentRow][currentCol-1] = true;
-                console.log(labyrinth[currentRow][currentCol]);
             }
             if(rightNeighbour(currentRow, currentCol, visited)) {
                 rows.push(currentRow);
                 cols.push(currentCol+1);
                 way[currentRow][currentCol+1] = distance;
                 visited[currentRow][currentCol+1] = true;
-                console.log(labyrinth[currentRow][currentCol]);
             }
 
             distance++;
         }
-        console.log(isThereAnExit);
         printWayToExit(isThereAnExit, labyrinth, way, gridX, gridY, finalRow, finalCol, distance);
     }
 }
@@ -127,11 +119,9 @@ function play(e) {
 function printWayToExit(isThereAnExit, labyrinth, way, gridX, gridY, finalRow, finalCol, distance) {
     if(isThereAnExit==false){
         document.getElementById("result").innerHTML = 'There is no exit from there! Try something else!';
-        console.log("sadnlaksd");
     }
 
     else {
-        console.log(labyrinth[gridY][gridX]);
         if(labyrinth[gridY][gridX]!='f') {
             let br=1;
             while (distance >= 0) {
@@ -141,8 +131,6 @@ function printWayToExit(isThereAnExit, labyrinth, way, gridX, gridY, finalRow, f
                 newImage.style.left = (finalCol * 75.591 + 75.591 / 8) + "px";
                 newImage.style.top = (finalRow * 75.591 + 75.591 / 8) + "px";
                 document.body.appendChild(newImage);
-                console.log(finalRow, finalCol);
-
                 if (finalCol - 1 >= 0 && way[finalRow][finalCol - 1] == distance - 1 && labyrinth[finalRow][finalCol - 1] != '*') {
                     finalCol--;
                     br++;
